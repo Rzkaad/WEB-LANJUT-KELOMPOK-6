@@ -1,0 +1,118 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model jasatitip {
+  Id_barang     Int    @id @default(autoincrement())
+  nama_customer String @db.VarChar(30)
+  jenis_barang  String @db.VarChar(30)
+  nama_barang   String @db.VarChar(30)
+  harga         Int
+}
+
+model laptop_kelompok2 {
+  id           Int    @id @default(autoincrement())
+  nama_laptop  String @db.VarChar(255)
+  ukuran_layar Int
+  Prosessor    String @db.VarChar(255)
+  vga          String
+  ram          Int
+  storage      Int
+  baterai      Int
+  harga        Int
+}
+
+model pencariankerja {
+  id_pekerjaan   Int    @id @default(autoincrement())
+  nama_pekerjaan String @db.VarChar(100)
+  lokasi         String @db.VarChar(100)
+  rating         Float
+}
+
+model pendaftaran {
+  id_user            Int                            @id @default(autoincrement())
+  nama               String                         @db.VarChar(50)
+  no_hp              String                         @db.VarChar(15)
+  email              String                         @unique @db.VarChar(50)
+  jenjang_pendidikan pendaftaran_jenjang_pendidikan
+  program_bimbel     String                         @db.VarChar(50)
+}
+
+model perpustakaan {
+  id_user         Int    @id @default(autoincrement())
+  nama            String @db.VarChar(13)
+  no_hp           String @db.VarChar(15)
+  email           String @db.VarChar(50)
+  judul_buku      String @db.VarChar(50)
+  pengarang       String @db.VarChar(50)
+  penerbit        String @db.VarChar(50)
+  tahun_terbit    String @db.VarChar(50)
+  jumlah_buku     String @db.VarChar(50)
+  jumlah_hari     String @db.VarChar(50)
+  tanggal_pinjam  String @db.VarChar(50)
+  tanggal_kembali String @db.VarChar(50)
+}
+
+model rental_mobil {
+  id_user             Int    @id @default(autoincrement())
+  nama                String @db.VarChar(100)
+  alamat              String @db.VarChar(100)
+  nomor_telepon       String @db.VarChar(20)
+  jenis_akun          String @db.VarChar(100)
+  jenis_mobil         String @db.VarChar(100)
+  kapasitas_penumpang String @db.VarChar(100)
+  harga_sewa_perhari  String @db.VarChar(100)
+  harga_sewa_perjam   String @db.VarChar(100)
+  tanggal_mulai_sewa  String @db.VarChar(10)
+  tanggal_akhir_sewa  String @db.VarChar(10)
+  lokasi_pengembalian String @db.VarChar(100)
+}
+
+model restoran {
+  id                Int      @id @default(autoincrement())
+  nama              String?
+  harga             Int
+  tanggal_pemesanan DateTime @default(now())
+}
+
+model restoran_daftar_menu {
+  id    Int     @id @default(autoincrement())
+  nama  String? @db.VarChar(255)
+  harga Int
+}
+
+model tabungan {
+  id_user     Int    @id @default(autoincrement())
+  nama        String @db.VarChar(13)
+  no_hp       String @db.VarChar(15)
+  email       String @db.VarChar(50)
+  tabungan    Float
+  pemasukan   Float
+  pengeluaran Float
+}
+
+model travel {
+  id               Int      @id @default(autoincrement())
+  tanggal_jam      DateTime
+  asal             String   @db.VarChar(30)
+  tujuan           String   @db.VarChar(30)
+  harga            Int
+  jumlah_penumpang Int
+}
+
+enum pendaftaran_jenjang_pendidikan {
+  TK
+  SD
+  SMP
+  SMA
+  SMK
+  S1
+  S2
+  S3
+}
+
